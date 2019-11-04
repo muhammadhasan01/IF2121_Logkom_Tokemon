@@ -1,0 +1,20 @@
+Deliverable I Tugas Besar Logika Komputasional
+Kelompok 7 - K3 :
+Muhammad Hasan - 13518012
+Hafshy Yazid Albisthami - 13518051
+Arthur Edgar Yunanto - 13518090
+Yan Arie Motinggo - 13518129
+
+Gambaran Kasar Cerita
+Permainan diawali dengan seseorang yang memasuki dunia game karena terlalu sering bermain game walau tubes menghadang. Ia terbangun dalam dunia game bernama Tokemon, yang merupakan game favorit dia, tapi dia tidak bisa keluar dari game tersebut dengan mudah, dia harus menjalankan misinya menjadi The Very Best Tokemon Trainer Like No One Ever Was di game tersebut agar bisa keluar. Saat dia terbangun, dia melihat professor menjelaskan tentang Dunia Tokemon. Professor tersebut kemudian menanyakan nama pemain (user), kemudian mungkin ditambahkan dengan menanyakan nama rival pemain yang nantinya bisa menjadi Final Boss. Setelah itu, pemain akan diberikan tiga pilihan Tokemon yang masing-masing merupakan Tokemon yang memiliki kekuatan api, air, dan daun, pemain hanya dapat memilih salah satu diantaranya. Pemain akan berpetualang dengan Tokemon pilihannya dan kemudian menambah Tokemon dengan menangkap Tokemon liar yang dapat berupa Normal Tokemon maupun Legendary Tokemon. Tokemon akan bertambah kekuatannya seiring petualangan jika Tokemon tersebut telah mendapatkan Experience dari melawan Tokemon lain. Jika memungkinkan dibuat, Pemain akan memenangkan game secara penuh jika pemain telah berhasil melawan Final Boss yakni rival dia, bahkan mungkin melawan The Elite Four sebelum melawan rival tersebut.
+
+Rencana Fakta dan Rule
+Tokemon memiliki kekuatan yang unik seperti api dan air, oleh karena itu akan ada efek jika suatu kekuatan memberi damage kepada kekuatan yang lain. Hal seperti ini bisa dituliskan menjadi suatu fakta, seperti misal :
+
+/* efektif(X, Y) = Kekuatan X efektif terhadap Kekuatan Y */
+efektif(air, api).
+efektif(daun, air).
+efektif(api, daun).
+
+Dari fakta diatas tersebut kita dapat menambahkan Rules, misalnya saja jika suatu kekuatan efektif terhadap yang lain maka damage yang diberikan dapat dikalikan 1,5 kali. Kemudian, dikarenakan pemain hanya dapat memiliki maksimal 6 Tokemon, maka diperlukan suatu list untuk menampung Tokemon yang sudah ditangkap. List juga dapat digunakan untuk menampung sejumlah moveset suatu Tokemon jika diperlukan. Saat Tokemon melawan Tokemon yang lain, pemain akan berada dalam Battle State dan hanya dapat keluar jika Tokemon yang dilawan ditangkap atau dikalahkan, maka diperlukan suatu Control Loop agar pemain tetap berada dalam Battle State tersebut.
+
