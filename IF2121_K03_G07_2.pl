@@ -143,11 +143,6 @@ start :-
     write('cara untuk keluar dari dunia tersebut dan melanjutkan tugas besar,'), nl,
     write('adalah dengan menjadi The Very Best Tokemon Trainer Like No One Ever Was!'), nl,
     nl,
-    randomize,
-    initMap,
-    initPlayer,
-initTokemon(jumlahTokeDiMap),
-initLegend(jumlahTokeLegendDiMap),
 !.
 
 start :-

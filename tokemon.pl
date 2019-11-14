@@ -1,61 +1,60 @@
 /* File berisi data-data tentang tokemon dan tipe-tipenya */
+:- dynamic(health / 2). /* health(tokemon, healthPoint) */
+
 
 /* Fakta-Fakta Tokemon */
-isFire(thanos).
 legendary(thanos).
-health(thanos, 600).
-attack(thanos, 100).
-special(thanos, 150).
-
-isEarth(saitama).
 legendary(saitama).
-health(saitama, 550).
-attack(saitama, 200).
-special(saitama, 300).
 
-isWind(naruto).
 normal(naruto).
-health(naruto, 330).
-attack(naruto, 55).
-special(naruto, 150).
-
-isEarth(goku).
 normal(goku).
-health(goku, 350).
-attack(goku, 90).
-special(goku, 200).
-
-isLeaf(usopp).
 normal(usopp).
-health(usopp, 360).
-attack(usopp, 60).
-special(usopp, 150).
-
-isEarth(strange).
-normal(strange).
-health(strange, 300).
-attack(strange, 40).
-special(strange, 100).
-
-isElectric(ironman).
-normal(ironman).
-health(ironman, 275).
-attack(ironman, 45).
-special(ironman, 120).
-
-isWater(batman).
+normal(doctorStrange).
 normal(batman).
-health(batman, 200).
-attack(batman, 35).
-special(batman, 70).
-
-isFire(scarlett).
 normal(scarlett).
-health(scarlett, 350).
-attack(scarlett, 70).
-special(scarlett, 150).
+normal(ironman).
 
-/* Terdapat 6 Tipe : fire, water, leaf, wind, earth, electric */
+/* Terdapat 6 Type : fire, water, leaf, wind, earth, electric */
+
+type(thanos, fire).
+type(saitama, earth).
+type(naruto, wind).
+type(goku, earth).
+type(usopp, leaf).
+type(doctorStrange, earth).
+type(ironman, electric).
+type(batman, water).
+type(scarlett, fire).
+
+health(thanos, 600).
+health(saitama, 550).
+health(naruto, 330).
+health(goku, 350).
+health(usopp, 360).
+health(doctorStrange, 300).
+health(batman, 200).
+health(scarlett, 350).
+health(ironman, 275).
+
+attack(thanos, 100).
+attack(saitama, 200).
+attack(naruto, 55).
+attack(goku, 90).
+attack(usopp, 60).
+attack(doctorStrange, 40).
+attack(ironman, 45).
+attack(batman, 35).
+attack(scarlett, 70).
+
+special(thanos, 150).
+special(saitama, 300).
+special(naruto, 150).
+special(goku, 200).
+special(usopp, 150).
+special(doctorStrange, 100).
+special(ironman, 120).
+special(batman, 70).
+special(scarlett, 150).
 
 /* effective(X, Y) = Tipe X efektif terhadap tipe Y */
 effective(fire, leaf).
@@ -86,3 +85,8 @@ not_effective(earth, earth).
 not_effective(earth, water).
 not_effective(electric, electric).
 not_effective(electric, earth).
+
+/* changeHealth */
+changeHealth(X, H) :-
+    retract(health(X, _)),
+    assertz(health(X, H)).
