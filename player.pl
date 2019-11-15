@@ -3,6 +3,7 @@
 :- include('utils.pl').
 :- include('tokemon.pl').
 
+
 inventori([]).
 healthID(1, -1).
 healthID(2, -1).

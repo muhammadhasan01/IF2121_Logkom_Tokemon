@@ -48,7 +48,8 @@ start :-
     write('#2 naruto (Tipe : wind)'), nl,
     write('#3 usopp (Tipe : leaf)'), nl, nl,
     write('Pilih salah satu dengan mengetik pilih(nomor).'), nl,
-    write('Contoh : pilih(2). artinya kamu akan memlih naruto'), nl, !.
+    write('Contoh : pilih(2). artinya kamu akan memlih naruto'), nl, nl,
+    write('(ketik help. untuk melihat instruksi game)'), nl, nl, !.
 
 pilih(X) :-
     gameState(Y),
@@ -92,15 +93,15 @@ pilih(X) :-
     write('Ketik status. untuk melihat status tokemonmu di Inventori!'), nl, !.
 
 help :-
-    write('Daftar Command : '), nl,
-    write('1. start : Untuk Memulai Permainan.'), nl,
-    write('2. map : Menampilkan Seluruh Peta Permainan.'), nl,
-    write('3. status : Menampilkan Status Tokemonmu di Inventori'), nl,
-    write('4. w : Bergerak ke arah Atas (Utara).'), nl,
-    write('5. s : Bergerak ke arah Bawah (Selatan).'), nl,
-    write('6. a : Bergerak ke arah Kiri (Barat).'), nl,
-    write('7. d : Bergerak ke arah Kanan (Timur).'), nl,
-    write('8. quit : Keluar dari permainan.'), nl,
+    write('---- Daftar Command ----'), nl,
+    write('1. start \t: Untuk Memulai Permainan.'), nl,
+    write('2. map \t\t: Menampilkan Seluruh Peta Permainan.'), nl,
+    write('3. status \t: Menampilkan Status Tokemonmu di Inventori'), nl,
+    write('4. w \t\t: Bergerak ke arah Atas (Utara).'), nl,
+    write('5. s \t\t: Bergerak ke arah Bawah (Selatan).'), nl,
+    write('6. a \t\t: Bergerak ke arah Kiri (Barat).'), nl,
+    write('7. d \t\t: Bergerak ke arah Kanan (Timur).'), nl,
+    write('8. quit \t: Keluar dari permainan.'), nl, nl,
     write('Catatan : Semua command di atas diakhiri titik (Misal : "start.")'), nl, !.
 
 quit :-

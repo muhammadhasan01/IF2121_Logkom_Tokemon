@@ -18,8 +18,8 @@ readFileLines(S, []) :-
 
 readFileLines(S, []) :-
     \+ at_end_of_stream(S),
-    read(S, X),
-    readFileLines(S, L).
+    read(S, X), (X == X),
+    readFileLines(S, L), (L == L).
 
 /* Menulis ke file eksternal */
 writeData(_, []) :- !.
