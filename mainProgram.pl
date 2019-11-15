@@ -8,7 +8,7 @@ Yan Arie Motinggo - 13518129
 */
 :- dynamic(gameState / 1). /* gameState(isGameOn/Off) */
 :- dynamic(takeTokemon / 1). /* takeTokemon(isTake) */
-:- include('player.pl').
+:- include('map.pl').
 
 gameState(0).
 takeTokemon(0).
@@ -44,12 +44,13 @@ start :-
     write('Tanpa ragu-ragu lagi, Profesor langsung memberi kamu 3 Tokemon piihan dia'), nl,
     write('Kamu disuruh memilih salah satu!'), nl, nl,
     write('--- Choose Your Starting Tokemon ---'), nl,
-    write('#1 goku (Tipe : earth)'), nl,
-    write('#2 naruto (Tipe : wind)'), nl,
-    write('#3 usopp (Tipe : leaf)'), nl, nl,
+    write('#1. goku \t(Tipe : earth)'), nl,
+    write('#2. naruto \t(Tipe : wind)'), nl,
+    write('#3. usopp \t(Tipe : leaf)'), nl, nl,
     write('Pilih salah satu dengan mengetik pilih(nomor).'), nl,
     write('Contoh : pilih(2). artinya kamu akan memlih naruto'), nl, nl,
-    write('(ketik help. untuk melihat instruksi game)'), nl, nl, !.
+    write('(ketik help. untuk melihat instruksi game)'),
+    initMap, nl, nl, !.
 
 pilih(X) :-
     gameState(Y),
@@ -105,5 +106,16 @@ help :-
     write('Catatan : Semua command di atas diakhiri titik (Misal : "start.")'), nl, !.
 
 quit :-
+    write('Terimakasih sudah memainkan game kami UwU ~~'), nl, nl,
     retract(inventori(_)),
-    retract(gameState(_)).
+    retract(takeTokemon(_)),
+    retract(gameState(_)),
+    retract(lebarPeta(_)),
+    retract(tinggiPeta(_)),
+    retract(land(_, _, _)),
+    retract(lokasiPlayer(_, _)),
+    retract(countJalan(_)),
+    retract(munculLegendary(_)),
+    retract(usedTokeCenter(_, _)),
+    retract(sedangLawan(_)),
+    retract(healthID(_, _)).

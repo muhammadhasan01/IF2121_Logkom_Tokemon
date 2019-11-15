@@ -3,14 +3,14 @@
 :- include('utils.pl').
 :- include('tokemon.pl').
 
-
-inventori([]).
-healthID(1, -1).
-healthID(2, -1).
-healthID(3, -1).
+inventori([goku, naruto, usopp]).
+healthID(1, 500).
+healthID(2, 500).
+healthID(3, 500).
 healthID(4, -1).
 healthID(5, -1).
 healthID(6, -1).
+healthID(7, -1).
 
 recovery([], _) :- !.
 recovery([A | Tail], Id) :-
@@ -19,6 +19,10 @@ recovery([A | Tail], Id) :-
     assertz(Id, HealthPoint),
     NewId is Id + 1,
     recovery(Tail, NewId), !.
+
+restoreTokemon :-
+    inventori(X),
+    recovery(X, 1), !.
 
 getLength(X) :-
     inventori(Tokemons),
@@ -41,7 +45,7 @@ printStatus([A | Tail], Nomor) :-
 status :-
     getLength(Len),
     Len == 0,
-    write('Kau belum mempunyai tokemon!'), nl, !.
+    write('Kamu belum mempunyai tokemon!'), nl, !.
 
 status :-
     inventori(X),
@@ -115,7 +119,6 @@ drop(X) :-
     hapus(Tokemons, HasilBuang, Idx),
     updateHealth(X, Len),
     assignTokemons(HasilBuang), !.
-
 
 
 remove :-
