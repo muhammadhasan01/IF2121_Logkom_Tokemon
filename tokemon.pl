@@ -16,6 +16,7 @@ normal(ironman).
 
 /* Terdapat 6 Type : fire, water, leaf, wind, earth, electric */
 
+/* Tokemon Types */
 type(thanos, fire).
 type(saitama, earth).
 type(naruto, wind).
@@ -26,6 +27,7 @@ type(ironman, electric).
 type(batman, water).
 type(scarlett, fire).
 
+/* Base Health Tokemon */
 health(thanos, 600).
 health(saitama, 550).
 health(naruto, 330).
@@ -85,8 +87,3 @@ not_effective(earth, earth).
 not_effective(earth, water).
 not_effective(electric, electric).
 not_effective(electric, earth).
-
-/* changeHealth */
-changeHealth(X, H) :-
-    retract(health(X, _)),
-    assertz(health(X, H)).
