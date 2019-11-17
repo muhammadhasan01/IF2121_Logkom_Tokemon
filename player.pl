@@ -1,22 +1,25 @@
 :- dynamic(inventori / 1). /* inventori(listTokemon) */
 :- dynamic(healthID / 2). /* healthID(Id, healthPoint) */
 :- include('utils.pl').
-:- include('tokemon.pl').
+:- include('fight.pl').
 
-inventori([goku, naruto, usopp]).
-healthID(1, 500).
-healthID(2, 500).
-healthID(3, 500).
-healthID(4, -1).
-healthID(5, -1).
-healthID(6, -1).
-healthID(7, -1).
+inventori([]).
+healthID(1, 0).
+healthID(2, 0).
+healthID(3, 0).
+healthID(4, 0).
+healthID(5, 0).
+healthID(6, 0).
+healthID(7, 0).
 
-recovery([], _) :- !.
+recovery([A], Id) :-
+    health(A, HealthPoint),
+    retract(healthID(Id, _)),
+    asserta(healthID(Id, HealthPoint)), !.
 recovery([A | Tail], Id) :-
     retract(healthID(Id, _)),
     health(A, HealthPoint),
-    assertz(Id, HealthPoint),
+    asserta(healthID(Id, HealthPoint)),
     NewId is Id + 1,
     recovery(Tail, NewId), !.
 
@@ -54,7 +57,7 @@ status :-
 
 assignTokemons(X) :-
     retract(inventori(_)),
-    assertz(inventori(X)).
+    asserta(inventori(X)).
 
 addTokemon(Tokemon, Health) :-
     getLength(Len),
@@ -70,7 +73,7 @@ addTokemon(Tokemon, Health) :-
         getLength(Len),
         Idx is Len + 1,
         retract(healthID(Idx, _)),
-        assertz(healthID(Idx, Health)),
+        asserta(healthID(Idx, Health)),
         assignTokemons(NewTokemons),
         write('Tokemon '),
         write(Tokemon),
@@ -79,7 +82,11 @@ addTokemon(Tokemon, Health) :-
 
 printTokemons([], _) :- !.
 printTokemons([A | Tail], Nomor) :-
-    write('#'), write(Nomor), write('. '), write(A), write('.'), nl,
+    write('#'), write(Nomor), write('. '), write(A), write(' - '),
+    healthID(Nomor, HealthTokemon),
+    type(A, TipeTokemon),
+    write('tipe : '), write(TipeTokemon), write(' - '),
+    write('health : '), write(HealthTokemon), write('.'), nl,
     NomorBaru is Nomor + 1,
     printTokemons(Tail, NomorBaru).
 
@@ -90,7 +97,7 @@ updateHealth(X, Y) :-
     X1 is X + 1,
     healthID(X1, Health),
     retract(healthID(X, _)),
-    assertz(healthID(X, Health)),
+    asserta(healthID(X, Health)),
     updateHealth(X1, Y).
 
 drop(X) :-

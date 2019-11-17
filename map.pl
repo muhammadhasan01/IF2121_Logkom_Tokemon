@@ -8,16 +8,23 @@
 :- include('eksternalUtil.pl').
 :- include('player.pl').
 
+munculLegendary(0).
+countJalan(0).
+lebarPeta(0).
+tinggiPeta(0).
+lokasiPlayer(0, 0).
+land(0, 0, border).
+usedTokeCenter(0, 0).
 
 initMap :-
-    random(10, 20, X),
-    random(10, 20, Y),
-    assertz(sedangLawan(0)),
-    assertz(munculLegendary(0)),
-    assertz(countJalan(0)),
-    assertz(lebarPeta(X)),
-    assertz(tinggiPeta(Y)),
-    assertz(lokasiPlayer(1, 1)),
+    random(13, 20, X),
+    random(13, 20, Y),
+    retract(lebarPeta(_)),
+    asserta(lebarPeta(X)),
+    retract(tinggiPeta(_)),
+    asserta(tinggiPeta(Y)),
+    retract(lokasiPlayer(_, _)),
+    asserta(lokasiPlayer(1, 1)),
     generateLand.
 
 generateLand :-
@@ -33,7 +40,7 @@ generateLand :-
     YMaxs is T - 1,
     forall(between(XMin, XMax, I), (
         forall(between(YMin, YMax, J), (
-            assertz(land(I, J, tanah))
+            asserta(land(I, J, tanah))
         ))
     )),
     forall(between(XMins, XMaxs, I), (
@@ -41,17 +48,18 @@ generateLand :-
             random(1, 100, Idx),
             genLand(Idx, Land),
             retract(land(I, J, _)),
-            assertz(land(I, J, Land))
+            asserta(land(I, J, Land))
         ))
-    )).
+    )),
+    retract(land(XMax, YMax, _)),
+    asserta(land(XMax, YMax, superLegendary)),
+    !.
 
 
-debugz :-
-    lebarPeta(X),
-    tinggiPeta(Y),
-    write('lebarnya adalah '), write(X), nl,
-    write('tingginya adalah '), write(Y), nl,
-    nl, !.
+printKoordinat(X, Y) :-
+    land(X, Y, NamaLand),
+    isSuperLegendary(NamaLand), !,
+    write('F').
 
 printKoordinat(X, Y) :-
     lokasiPlayer(X1, Y1),
@@ -105,6 +113,13 @@ printKoordinat(X, Y) :-
     !, write('R').
 
 randomLegend(L, T) :-
+    random(1, L, X),
+    random(1, T, Y),
+    land(X, Y, NamaLand),
+    isSuperLegendary(NamaLand),
+    randomLegend(L, T).
+
+randomLegend(L, T) :-
     lokasiPlayer(X1, Y1),
     random(1, L, X),
     random(1, T, Y),
@@ -115,7 +130,7 @@ randomLegend(L, T) :-
     random(1, L, X),
     random(1, T, Y),
     retract(land(X, Y, _)),
-    assertz(land(X, Y, legendPlace)), !.
+    asserta(land(X, Y, legendPlace)), !.
 
 generateLegend :-
     tinggiPeta(T),
@@ -127,24 +142,28 @@ cekCount(X) :-
 
 cekCount(X) :-
     X =:= 20,
-    write('.....Grrr....'), nl,
-    write('...Grrr...'), nl,
+    nl, nl,
+    write('--------------'), nl,
+    write('...Grrr.....'), nl,
+    write('.....Grrr...'), nl,
     write('GRUWAHHHH.....'), nl,
+    write('--------------'), nl,
+    nl,
     generateLegend,
     write('Sepertinya ada suara aneh muncul sebaiknya anda cek map.'), nl,
     retract(munculLegendary(_)),
-    assertz(munculLegendary(1)),
+    asserta(munculLegendary(1)),
     !.
 
 tambahCount :-
     countJalan(X),
     XNew is X + 1,
     retract(countJalan(_)),
-    assertz(countJalan(XNew)),
+    asserta(countJalan(XNew)),
     cekCount(X), !.
 
 map :-
-    assertz(land(1, 1, player)),
+    asserta(land(1, 1, player)),
     tinggiPeta(T),
     lebarPeta(L),
     XMin is 0,
@@ -174,6 +193,7 @@ writeKeterangan :-
     write('T : Tokemon Center'), nl,
     write('- : Tanah Kosong'), nl,
     write('R : Rumput'), nl,
+    write('F : Final Battle'), nl,
     write('L : ?????'), nl, !.
 
 writeKeterangan :-
@@ -183,6 +203,7 @@ writeKeterangan :-
     write('T : Tokemon Center'), nl,
     write('- : Tanah Kosong'), nl,
     write('R : Rumput'), nl,
+    write('F : Final Battle'), nl,
     !.
 
 isBorderAtas(_, Y) :-
@@ -207,6 +228,7 @@ namaLand(border).
 namaLand(tanah).
 namaLand(tokCenter).
 namaLand(rumput).
+namaLand(superLegendary).
 
 /* isNamaLand(namaLand) */
 isBorder(border).
@@ -214,239 +236,15 @@ isTanah(tanah).
 isTokCenter(tokCenter).
 isLegendary(legendPlace).
 isRumput(rumput).
+isSuperLegendary(superLegendary).
 
 updateLokasiPlayer(X, Y) :-
     retract(lokasiPlayer(_, _)),
-    assertz(lokasiPlayer(X, Y)).
+    asserta(lokasiPlayer(X, Y)).
 
 assignLokasi(X, Y, Land) :-
     retract(land(X, Y, _)),
-    assertz(land(X, Y, Land)).
-
-d :-
-    takeTokemon(X),
-    (X == 0),
-    write('Kamu belum memlih Tokemon, kamu tidak bisa dulu bergerak!'), nl, !.
-
-d :-
-    sedangLawan(X),
-    (X =\= 0),
-    write('Kamu sedang melawan Tokemon, kamu tidak bisa bergerak!'), nl, !.
-
-d :-
-    lokasiPlayer(X, Y),
-    XNew is X + 1,
-    isBorderKanan(XNew, Y),
-    write('Tidak bisa bergerak kanan, ada pagar yang menghalangi!'), nl, !.
-
-d :-
-    lokasiPlayer(X, Y),
-    XNew is X + 1,
-    land(XNew, Y, Land),
-    isBorder(Land),
-    write('Tidak bisa bergerak kanan, ada pagar yang menghalangi!'), nl, !.
-
-d :-
-    lokasiPlayer(X, Y),
-    XNew is X + 1,
-    land(XNew, Y, Land),
-    isTanah(Land),
-    updateLokasiPlayer(XNew, Y),
-    tambahCount,
-    write('Kamu berada di tanah kosong.'), nl, !.
-
-d :-
-    lokasiPlayer(X, Y),
-    XNew is X + 1,
-    land(XNew, Y, Land),
-    isTokCenter(Land),
-    updateLokasiPlayer(XNew, Y),
-    tambahCount,
-    write('Kamu berada di Tokemon Center, ketik restore. untuk menyembuhkan Tokemonmu!'), nl,
-    write('(restore. hanya akan bekerja jika tempat ini belum dilakukan untuk restore sebelumnya)'), nl, !.
-
-d :-
-    lokasiPlayer(X, Y),
-    XNew is X + 1,
-    land(XNew, Y, Land),
-    isRumput(Land),
-    updateLokasiPlayer(XNew, Y),
-    tambahCount,
-    write('Kamu menginjak rumput!'),
-    encounterTokemon, !.
-
-d :-
-    lokasiPlayer(X, Y),
-    XNew is X + 1,
-    land(XNew, Y, Land),
-    isLegendary(Land),
-    updateLokasiPlayer(XNew, Y),
-    tambahCount,
-    write('Kamu bertemu dengan legendary Tokemon!'), nl,
-    write('Kamu tidak bisa lari dan terpaksa untuk melawannya, bersiaplah!'), nl,
-    fightLegendary, !.
-
-a :-
-    takeTokemon(X),
-    (X == 0),
-    write('Kamu belum memlih Tokemon, kamu tidak bisa dulu bergerak!'), nl, !.
-
-a :-
-    sedangLawan(X),
-    (X =\= 0),
-    write('Kamu sedang melawan Tokemon, kamu tidak bisa bergerak!'), nl, !.
-
-a :-
-    lokasiPlayer(X, Y),
-    XNew is X - 1,
-    isBorderKanan(XNew, Y),
-    write('Tidak bisa bergerak kiri, ada pagar yang menghalangi!'), nl, !.
-
-a :-
-    lokasiPlayer(X, Y),
-    XNew is X - 1,
-    land(XNew, Y, Land),
-    isBorder(Land),
-    write('Tidak bisa bergerak kiri, ada pagar yang menghalangi!'), nl, !.
-
-a :-
-    lokasiPlayer(X, Y),
-    XNew is X - 1,
-    land(XNew, Y, Land),
-    isTanah(Land),
-    updateLokasiPlayer(XNew, Y),
-    tambahCount,
-    write('Kamu berada di tanah kosong.'), nl, !.
-
-a :-
-    lokasiPlayer(X, Y),
-    XNew is X - 1,
-    land(XNew, Y, Land),
-    isTokCenter(Land),
-    updateLokasiPlayer(XNew, Y),
-    tambahCount,
-    write('Kamu berada di Tokemon Center, ketik restore. untuk menyembuhkan Tokemonmu!'), nl,
-    write('(restore. hanya akan bekerja jika tempat ini belum dilakukan untuk restore sebelumnya)'), nl, !.
-a :-
-    lokasiPlayer(X, Y),
-    XNew is X - 1,
-    land(XNew, Y, Land),
-    isLegendary(Land),
-    updateLokasiPlayer(XNew, Y),
-    tambahCount,
-    write('Kamu bertemu dengan legendary Tokemon!'), nl,
-    write('Kamu tidak bisa lari dan terpaksa untuk melawannya, bersiaplah!'), nl,
-    fightLegendary, !.
-
-w :-
-    takeTokemon(X),
-    (X == 0),
-    write('Kamu belum memlih Tokemon, kamu tidak bisa dulu bergerak!'), nl, !.
-
-
-w :-
-    sedangLawan(X),
-    (X =\= 0),
-    write('Kamu sedang melawan Tokemon, kamu tidak bisa bergerak!'), nl, !.
-
-
-w :-
-    lokasiPlayer(X, Y),
-    YNew is Y - 1,
-    isBorderKanan(X, YNew),
-    write('Tidak bisa bergerak atas, ada pagar yang menghalangi!'), nl, !.
-
-w :-
-    lokasiPlayer(X, Y),
-    YNew is Y - 1,
-    land(X, YNew, Land),
-    isBorder(Land),
-    write('Tidak bisa bergerak atas, ada pagar yang menghalangi!'), nl, !.
-
-w :-
-    lokasiPlayer(X, Y),
-    YNew is Y - 1,
-    land(X, YNew, Land),
-    isTanah(Land),
-    updateLokasiPlayer(X, YNew),
-    tambahCount,
-    write('Kamu berada di tanah kosong.'), nl, !.
-
-w :-
-    lokasiPlayer(X, Y),
-    YNew is Y - 1,
-    land(X, YNew, Land),
-    isTokCenter(Land),
-    updateLokasiPlayer(X, YNew),
-    tambahCount,
-    write('Kamu berada di Tokemon Center, ketik restore. untuk menyembuhkan Tokemonmu!'), nl,
-    write('(restore. hanya akan bekerja jika tempat ini belum dilakukan untuk restore sebelumnya)'), nl, !.
-
-w :-
-    lokasiPlayer(X, Y),
-    YNew is Y - 1,
-    land(X, YNew, Land),
-    isLegendary(Land),
-    updateLokasiPlayer(X, YNew),
-    tambahCount,
-    write('Kamu bertemu dengan legendary Tokemon!'), nl,
-    write('Kamu tidak bisa lari dan terpaksa untuk melawannya, bersiaplah!'), nl,
-    fightLegendary, !.
-
-s :-
-    takeTokemon(X),
-    (X == 0),
-    write('Kamu belum memlih Tokemon, kamu tidak bisa dulu bergerak!'), nl, !.
-
-
-s :-
-    sedangLawan(X),
-    (X =\= 0),
-    write('Kamu sedang melawan Tokemon, kamu tidak bisa bergerak!'), nl, !.
-
-
-s :-
-    lokasiPlayer(X, Y),
-    YNew is Y + 1,
-    isBorderKanan(X, YNew),
-    write('Tidak bisa bergerak ke bawah, ada pagar yang menghalangi!'), nl, !.
-
-s :-
-    lokasiPlayer(X, Y),
-    YNew is Y + 1,
-    land(X, YNew, Land),
-    isBorder(Land),
-    write('Tidak bisa bergerak ke bawah, ada pagar yang menghalangi!'), nl, !.
-
-s :-
-    lokasiPlayer(X, Y),
-    YNew is Y + 1,
-    land(X, YNew, Land),
-    isTanah(Land),
-    updateLokasiPlayer(X, YNew),
-    tambahCount,
-    write('Kamu berada di tanah kosong.'), nl, !.
-
-s :-
-    lokasiPlayer(X, Y),
-    YNew is Y + 1,
-    land(X, YNew, Land),
-    isTokCenter(Land),
-    updateLokasiPlayer(X, YNew),
-    tambahCount,
-    write('Kamu berada di Tokemon Center, ketik restore. untuk menyembuhkan Tokemonmu!'), nl,
-    write('(restore. hanya akan bekerja jika tempat ini belum dilakukan untuk restore sebelumnya)'), nl, !.
-
-s :-
-    lokasiPlayer(X, Y),
-    YNew is Y + 1,
-    land(X, YNew, Land),
-    isLegendary(Land),
-    updateLokasiPlayer(X, YNew),
-    tambahCount,
-    write('Kamu bertemu dengan legendary Tokemon!'), nl,
-    write('Kamu tidak bisa lari dan terpaksa untuk melawannya, bersiaplah!'), nl,
-    fightLegendary, !.
+    asserta(land(X, Y, Land)).
 
 restore :-
     lokasiPlayer(X, Y),
@@ -466,7 +264,7 @@ restore :-
     land(X, Y, Land),
     isTokCenter(Land),
     \+usedTokeCenter(X, Y),
-    assertz(usedTokeCenter(X, Y)),
+    asserta(usedTokeCenter(X, Y)),
     restoreTokemon,
     write('Tokemon anda berhasil direstore!'), nl, !.
 
