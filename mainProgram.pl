@@ -137,7 +137,6 @@ quit :-
     retract(usedTokeCenter(_, _)),
     retract(winOrLose(_)),
     asserta(winOrLose(0)),
-    battleOver,
     retract(healthID(_, _)), !.
 
 d :-
@@ -444,13 +443,13 @@ s :-
 cekSelesai :-
     winOrLose(X),
     (X =:= 2),
-    write('Kamu kalahhh :((('), nl, nl,
+    nl, write('Kamu kalahhh :((('), nl, nl,
     quit, !.
 
 cekSelesai :-
     winOrLose(X),
     (X =:= 1),
-    write('Selamatt kamu telah menang :))))'), nl,
+    nl, write('Selamatt kamu telah menang :))))'), nl, nl,
     quit, !.
 
 cekSelesai :-

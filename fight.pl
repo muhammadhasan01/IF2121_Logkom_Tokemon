@@ -101,8 +101,6 @@ battleOver :-
     asserta(battleMode(0)),
     retract(enemyTokemon(_)),
     asserta(enemyTokemon(0)),
-    retract(healthID(7, _)),
-    asserta(healthID(7, -1)),
     retract(specialTok(_)),
     asserta(specialTok(0)),
     retract(enemySpecial(_)),
@@ -307,16 +305,16 @@ battle :-
     !.
 
 cekMenang :-
-    sedangLawan(0), !.
+    sedangLawan(X), (X == 0), !.
 
 cekMenang :-
-    sedangLawan(1), !.
+    sedangLawan(X), (X == 1), !.
 
 cekMenang :-
-    sedangLawan(2), !.
+    sedangLawan(X), (X == 2), !.
 
 cekMenang :-
-    sedangLawan(3),
+    sedangLawan(X), (X == 3),
     retract(winOrLose(_)),
     asserta(winOrLose(1)), cekSelesai, !.
 
@@ -333,8 +331,7 @@ cekMusuh(JML) :-
         asserta(healthID(7, HealthBaru)),
         enemyTokemon(NamaMusuh),
         write('Tokemon '), write(NamaMusuh), write(' Has been defeated!'), nl,
-        cekMenang,
-        battleOver
+        cekMenang, battleOver
     ), !.
 
 
