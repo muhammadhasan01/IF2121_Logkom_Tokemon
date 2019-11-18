@@ -6,6 +6,8 @@ superlegendary(saitama).
 legendary(thanos).
 legendary(majinBuu).
 legendary(madara).
+legendary(ultron).
+legendary(frieza).
 
 normal(naruto).
 normal(sasuke).
@@ -16,10 +18,13 @@ normal(doctorStrange).
 normal(batman).
 normal(scarlett).
 normal(ironman).
+normal(kisame).
 
 /* Terdapat 6 Type : fire, water, leaf, wind, earth, electric */
 
 /* Tokemon Types */
+type(ultron, leaf).
+type(frieza, water).
 type(saitama, earth).
 type(sasuke, electric).
 type(thanos, fire).
@@ -33,13 +38,15 @@ type(ironman, electric).
 type(batman, water).
 type(madara, water).
 type(scarlett, fire).
+type(kisame, water).
 
 /* Base Health Tokemon */
 health(saitama, 1500).
 health(thanos, 600).
-health(majinBuu, 550).
+health(majinBuu, 750).
 health(naruto, 330).
 health(sasuke, 300).
+health(kisame, 290).
 health(goku, 350).
 health(vegeta, 340).
 health(usopp, 360).
@@ -48,10 +55,14 @@ health(batman, 200).
 health(scarlett, 350).
 health(ironman, 275).
 health(madara, 500).
+health(ultron, 540).
+health(frieza, 550).
 
 attackT(saitama, 350).
 attackT(thanos, 100).
-attackT(majinBuu, 200).
+attackT(majinBuu, 250).
+attackT(frieza, 250).
+attackT(ultron, 230).
 attackT(madara, 240).
 attackT(naruto, 55).
 attackT(sasuke, 50).
@@ -62,10 +73,13 @@ attackT(doctorStrange, 40).
 attackT(ironman, 45).
 attackT(batman, 35).
 attackT(scarlett, 70).
+attackT(kisame, 50).
 
 specialT(saitama, 1000).
 specialT(thanos, 360).
 specialT(majinBuu, 400).
+specialT(frieza, 380).
+specialT(ultron, 340).
 specialT(madara, 340).
 specialT(naruto, 150).
 specialT(sasuke, 155).
@@ -76,6 +90,7 @@ specialT(doctorStrange, 100).
 specialT(ironman, 120).
 specialT(batman, 70).
 specialT(scarlett, 150).
+specialT(kisame, 100).
 
 /* effective(X, Y) = Tipe X efektif terhadap tipe Y */
 effective(fire, leaf).

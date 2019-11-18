@@ -41,8 +41,16 @@ start :-
     write('Disebutkan bahwa terdapat Super Legendary Tokemon yang perlu dikalahkan'), nl,
     write('Apakah kamu bisa mengalahkannya ?'), nl,
 
-    nl, nl, write(' --- TOKEMON ---'), nl, nl,
+    nl, nl,
 
+    write(' _____ _____ _   __ ________  ________ _   _ '), nl,
+    write('|_   _|  _  | | / /|  ___|  \/  |  _  | \ | |'), nl,
+    write('  | | | | | | |/ / | |__ | .  . | | | |  \| |'), nl,
+    write('  | | | | | |    \ |  __|| |\/| | | | | . ` |'), nl,
+    write('  | | \ \_/ / |\  \| |___| |  | \ \_/ / |\  |'), nl,
+    write('  \_/  \___/\_| \_/\____/\_|  |_/\___/\_| \_/'), nl,
+
+    nl,
 
     write('Tanpa ragu-ragu lagi, Profesor langsung memberi kamu 3 Tokemon piihan dia'), nl,
     write('Kamu disuruh memilih salah satu!'), nl, nl,
