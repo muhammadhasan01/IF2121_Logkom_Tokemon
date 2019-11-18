@@ -1,7 +1,3 @@
-------------- FILE README UNTUK GAME TOKEMON -------------
-
-*** File ini berisi paduan bagaimana untuk memulai game Tokemon ini ***
-
 REQUIREMENTS :
 
 1. Install GNU Prolog versi 1.4.5 atau lebih baru.
