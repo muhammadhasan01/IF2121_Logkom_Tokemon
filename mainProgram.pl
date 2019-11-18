@@ -40,15 +40,13 @@ start :-
     write('Namun, untuk menjadi The Best, kamu harus bisa mengalahkan Final Boss!'), nl,
     write('Disebutkan bahwa terdapat Super Legendary Tokemon yang perlu dikalahkan'), nl,
     write('Apakah kamu bisa mengalahkannya ?'), nl,
-
-    nl, nl,
-
+    nl,
     write(' _____ _____ _   __ ________  ________ _   _ '), nl,
-    write('|_   _|  _  | | / /|  ___|  \/  |  _  | \ | |'), nl,
-    write('  | | | | | | |/ / | |__ | .  . | | | |  \| |'), nl,
-    write('  | | | | | |    \ |  __|| |\/| | | | | . ` |'), nl,
-    write('  | | \ \_/ / |\  \| |___| |  | \ \_/ / |\  |'), nl,
-    write('  \_/  \___/\_| \_/\____/\_|  |_/\___/\_| \_/'), nl,
+    write('|_   _|  _  | | / /|  ___|  \\/  |  _  | \\ | |'), nl,
+    write('  | | | | | | |/ / | |__ |      | | | |  \\| |'), nl,
+    write('  | | | | | |    \\ |  __|| |\\/| | | | |     |'), nl,
+    write('  | | \\ \\_/ / |\\  \\| |___| |  | \\ \\_/ / |\\  |'), nl,
+    write('  \\_/  \\___/\\_| \\_/\\____/\\_|  |_/\\___/\\_| \\_/'), nl,
 
     nl,
 
@@ -124,7 +122,16 @@ help :-
     write('Catatan : Semua command di atas diakhiri titik (Misal : "start.")'), nl, !.
 
 quit :-
-    write('---- GAME OVER ----'), nl,
+
+    nl,
+    write(' _____   ___  ___  ___ _____   _____  _   _ ___________ '), nl,
+    write('|  __ \\ / _ \\ |  \\/  ||  ___| |  _  || | | |  ___| ___  '), nl,
+    write('| |  \\// /_\\ \\| .  . || |__   | | | || | | | |__ | |_/ /'), nl,
+    write('| | __ |  _  || |\\/| ||  __|  | | | || | | |  __||    / '), nl,
+    write('| |_\\ \\| | | || |  | || |___  \\ \\_/ /\\ \\_/ / |___| |\\ \\ '), nl,
+    write(' \\____/\\_| |_/\\_|  |_/\\____/   \\___/  \\___/\\____/\\_| \\_|'), nl,
+
+
     nl, nl, write('Terimakasih sudah memainkan game kami UwU ~~'), nl, nl,
     retract(inventori(_)),
     asserta(inventori([])),
@@ -451,13 +458,25 @@ s :-
 cekSelesai :-
     winOrLose(X),
     (X =:= 2),
-    nl, write('Kamu kalahhh :((('), nl, nl,
+    nl, nl,
+    write('__   _______ _   _   _     _____ _____ _____ '), nl,
+    write('\\ \\ / /  _  | | | | | |   |  _  /  ___|  ___|'), nl,
+    write(' \\ V /| | | | | | | | |   | | | \\ `--.| |__  '), nl,
+    write('  \\ / | | | | | | | | |   | | | |`--. \\  __| '), nl,
+    write('  | | \\ \\_/ / |_| | | |___\\ \\_/ /\\__/ / |___ '), nl,
+    write('  \\_/  \\___/ \\___/  \\_____/\\___/\\____/\\____/ '), nl, nl,
     quit, !.
 
 cekSelesai :-
     winOrLose(X),
     (X =:= 1),
-    nl, write('Selamatt kamu telah menang :))))'), nl, nl,
+    nl,
+    write('__   _______ _   _   _    _ _____ _   _ '), nl,
+    write('\\ \\ / /  _  | | | | | |  | |_   _| \\ | |'), nl,
+    write(' \\ V /| | | | | | | | |  | | | | |  \\| |'), nl,
+    write('  \\ / | | | | | | | | |/\\| | | | | . ` |'), nl,
+    write('  | | \\ \\_/ / |_| | \\  /\\  /_| |_| |\\  |'), nl,
+    write('  \\_/  \\___/ \\___/   \\/  \\/ \\___/\\_| \\_/'), nl, nl,
     quit, !.
 
 cekSelesai :-
