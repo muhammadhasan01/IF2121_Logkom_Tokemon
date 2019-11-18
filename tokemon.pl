@@ -16,6 +16,11 @@ normal(doctorStrange).
 normal(batman).
 normal(scarlett).
 normal(ironman).
+normal(robin).
+normal(joker).
+normal(spiderman).
+normal(neptunus).
+
 
 /* Terdapat 6 Type : fire, water, leaf, wind, earth, electric */
 
@@ -33,6 +38,10 @@ type(ironman, electric).
 type(batman, water).
 type(madara, water).
 type(scarlett, fire).
+type(robin, wind).
+type(joker, fire).
+type(spiderman, leaf).
+type(neptunus, water).
 
 /* Base Health Tokemon */
 health(saitama, 1500).
@@ -48,6 +57,10 @@ health(batman, 200).
 health(scarlett, 350).
 health(ironman, 275).
 health(madara, 500).
+health(robin, 385).
+health(joker, 450).
+health(spiderman, 400).
+health(neptunus, 420).
 
 attackT(saitama, 350).
 attackT(thanos, 100).
@@ -62,6 +75,10 @@ attackT(doctorStrange, 40).
 attackT(ironman, 45).
 attackT(batman, 35).
 attackT(scarlett, 70).
+attackT(robin, 80).
+attackT(joker, 90).
+attackT(spiderman, 85).
+attackT(neptunus, 95).
 
 specialT(saitama, 1000).
 specialT(thanos, 360).
@@ -74,8 +91,12 @@ specialT(vegeta, 200).
 specialT(usopp, 150).
 specialT(doctorStrange, 100).
 specialT(ironman, 120).
-specialT(batman, 70).
+specialT(batman, 90).
 specialT(scarlett, 150).
+specialT(robin, 200).
+specialT(joker, 220).
+specialT(spiderman, 220).
+specialT(neptunus, 250).
 
 /* effective(X, Y) = Tipe X efektif terhadap tipe Y */
 effective(fire, leaf).
