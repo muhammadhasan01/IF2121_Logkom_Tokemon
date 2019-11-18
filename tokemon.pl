@@ -18,7 +18,11 @@ normal(doctorStrange).
 normal(batman).
 normal(scarlett).
 normal(ironman).
-normal(kisame).
+normal(robin).
+normal(joker).
+normal(spiderman).
+normal(neptunus).
+
 
 /* Terdapat 6 Type : fire, water, leaf, wind, earth, electric */
 
@@ -88,7 +92,7 @@ specialT(vegeta, 200).
 specialT(usopp, 150).
 specialT(doctorStrange, 100).
 specialT(ironman, 120).
-specialT(batman, 70).
+specialT(batman, 90).
 specialT(scarlett, 150).
 specialT(kisame, 100).
 
