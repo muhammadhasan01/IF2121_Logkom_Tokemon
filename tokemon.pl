@@ -27,6 +27,10 @@ normal(neptunus).
 /* Terdapat 6 Type : fire, water, leaf, wind, earth, electric */
 
 /* Tokemon Types */
+type(robin, leaf).
+type(joker, leaf).
+type(spiderman, water).
+type(neptunus, fire).
 type(ultron, leaf).
 type(frieza, water).
 type(saitama, earth).
@@ -45,6 +49,10 @@ type(scarlett, fire).
 type(kisame, water).
 
 /* Base Health Tokemon */
+health(robin, 230).
+health(joker, 320).
+health(spiderman, 250).
+health(neptunus, 300).
 health(saitama, 1500).
 health(thanos, 600).
 health(majinBuu, 750).
@@ -62,6 +70,10 @@ health(madara, 500).
 health(ultron, 540).
 health(frieza, 550).
 
+attackT(robin, 130).
+attackT(joker, 230).
+attackT(spiderman, 150).
+attackT(neptunus, 200).
 attackT(saitama, 350).
 attackT(thanos, 100).
 attackT(majinBuu, 250).
@@ -79,6 +91,10 @@ attackT(batman, 35).
 attackT(scarlett, 70).
 attackT(kisame, 50).
 
+specialT(robin, 200).
+specialT(joker, 300).
+specialT(spiderman, 200).
+specialT(neptunus, 250).
 specialT(saitama, 1000).
 specialT(thanos, 360).
 specialT(majinBuu, 400).
